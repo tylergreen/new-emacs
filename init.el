@@ -162,8 +162,8 @@
 ; Emacs Config
 
 ; never see that stupid warning again
-; can also pass :safe
-(setq enable-local-variables nil)
+; can also pass nil
+(setq enable-local-variables :safe)
 
 ; don't make me type yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -189,10 +189,7 @@
 			  ))
 
 (global-keymap 
- "C-w" kill-word
  "C-q" backward-kill-word
- "C-x C-k" kill-region
- "C-x k" kill-region
  "C-x C-j" kill-this-buffer
  "C-x j" kill-this-buffer
  "C-." other-frame
@@ -205,21 +202,26 @@
  "M-u" upcase-prev
  "M-c" cap-prev
  "C-x C-b" ibuffer
- "M-u" windmove-up
- "M-m" windmove-down
- "M-h" windmove-left
- "M-'" windmove-right
- "M-k" zap-to-char
- "C-z" kill-ring-save
+ "M-k" kill-ring-save
+; "M-w" ; available
  )
 
 (defun datahand ()
     (global-keymap
 	"M-SPC" set-mark-command
-	"C-;" rename-buffer
+	 "M-u" windmove-up
+	 "M-m" windmove-down
+	 "M-h" windmove-left
+	 "M-'" windmove-right
 	))
 
 (datahand)
+
+(put 'kill-ring-save 'interactive-form
+	 '(interactive 
+	   (if (use-region-p)
+		   (list (region-beginning) (region-end))
+		 (list (line-beginning-position) (line-beginning-position 2)))))
 
 (defun disable (commands)
   (mapc (fn (x) (put x 'disabled t))
