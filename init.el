@@ -7,6 +7,13 @@
 ;*****************
 ; Elisp Utils
 
+(defmacro defi (name &rest body)
+  "define standard interactive function"
+  `(defun ,name () 
+     (interactive)
+     ,@body))
+
+
 (defun group (n source)
   (if (endp source)
       nil
@@ -192,6 +199,8 @@
  "C-q" backward-kill-word
  "C-x C-j" kill-this-buffer
  "C-x j" kill-this-buffer
+ "C-k" kill-line-or-region
+; "C-w" ;available
  "C-." other-frame
  "C-," previous-multiframe-window
  "C-x C-u" undo
@@ -223,6 +232,14 @@
 		   (list (region-beginning) (region-end))
 		 (list (line-beginning-position) (line-beginning-position 2)))))
 
+(defi kill-line-or-region
+  (if (use-region-p)
+	  (kill-region (region-beginning) (region-end))
+	(kill-line)))
+
+
+
+
 (defun disable (commands)
   (mapc (fn (x) (put x 'disabled t))
 	commands))
@@ -234,11 +251,6 @@
 ; *********
 ; Custom Commands
 
-(defmacro defi (name &rest body)
-  "define standard interactive function"
-  `(defun ,name () 
-     (interactive)
-     ,@body))
 
 (defi dot
   (find-file "~/.emacs.d/init.el"))
