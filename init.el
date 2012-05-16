@@ -213,6 +213,8 @@
  "C-x C-b" ibuffer
  "M-k" kill-ring-save
 ; "M-w" ; available
+; M-f forward-whitespace
+; M-b backward-whitespace ; not written
  )
 
 (defun datahand ()
@@ -299,7 +301,7 @@
             ("ERC"   (mode . erc-mode))))))
 
 (add-hook 'ibuffer-mode-hook
-  (fn () (ibuffer-switch-to-saved-filter-groups "default")))
+		  (fn () (ibuffer-switch-to-saved-filter-groups "default")))
 
 
 ; *********** 
@@ -346,5 +348,29 @@
           :publishing-function org-publish-attachment)
 
     ("growblog" :components ("org-growblog" "org-growblog-static"))
+
+  ("org-progblog"
+          ;; Path to your org files.
+          :base-directory "~/blogs/progblog/org/"
+          :base-extension "org"
+
+          ;; Path to your Jekyll project.
+          :publishing-directory "~/blogs/progblog/tylergreen.github.com/"
+          :recursive t
+          :publishing-function org-publish-org-to-html
+          :headline-levels 4 
+          :html-extension "html"
+          :body-only t ;; Only export section between <body> </body>
+    )
+
+
+    ("org-progblog-static"
+          :base-directory "~/blogs/progblog/org/"
+          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+          :publishing-directory "/blogs/progblog/"
+          :recursive t
+          :publishing-function org-publish-attachment)
+
+    ("progblog" :components ("org-progblog" "org-progblog-static"))
 
 ))
