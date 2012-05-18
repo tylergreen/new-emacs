@@ -5,25 +5,23 @@
 ; M-x org-publish
 ; jekyll --server
 
-(defvar prog-blog-dir "~/blogs/progblog/org/_posts/")
+(defvar prog-blog-dir "~/blogs/tylergreen.github.com/_posts/")
 
 (defvar jekyll-post-meta-data 
-  "#+STARTUP: showall indent
-#+STARTUP: hidestars
-#+BEGIN_HTML
+"
 ---
 layout: default
 title: 
 ---
-#+END_HTML
-")
+"
+)
 
 (defun todays-post-file-name (post-title)
   (concat 
    prog-blog-dir
-   (substring (shell-command-to-string "date +'%m-%d-%y'") 0 -1)
+   (substring (shell-command-to-string "date +'%Y-%m-%d'") 0 -1)
    "-" post-title
-   "-post.Org"
+   "-post.org"
   ))
 
 (defun new-post (post-title)
@@ -32,3 +30,5 @@ title:
 	(find-file filename)
 	(insert jekyll-post-meta-data)
 	))
+
+(provide 'borg)

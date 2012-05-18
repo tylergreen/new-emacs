@@ -60,6 +60,9 @@
 ;***************
 ; Customizations
 
+; allow exit of emacs client without closing any buffers
+(setq server-kill-new-buffers nil)
+
 (setq backup-directory-alist
 	  `((".*" . ,temporary-file-directory)))
 
@@ -160,6 +163,7 @@
 		ido
 		tramp
 		sql
+		borg
 		))
 
 (ido-mode)
