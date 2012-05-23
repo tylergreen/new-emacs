@@ -60,6 +60,9 @@
 ;***************
 ; Customizations
 
+;; use word wrapping everywhere
+(global-visual-line-mode 1)
+
 ; allow exit of emacs client without closing any buffers
 (setq server-kill-new-buffers nil)
 
@@ -163,7 +166,6 @@
 		ido
 		tramp
 		sql
-		borg
 		))
 
 (ido-mode)
@@ -318,63 +320,5 @@
     (add-hook 'coffee-mode-hook
 	      '(lambda () (coffee-custom))))
 
-;**********
-; org-mode
-
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-
-;*******************
-; Jekyll org-mode
-
-(setq org-publish-project-alist
-      '(
-
-  ("org-growblog"
-          ;; Path to your org files.
-          :base-directory "~/blogs/growblog/org/"
-          :base-extension "org"
-
-          ;; Path to your Jekyll project.
-          :publishing-directory "~/blogs/growblog/jekyll/"
-          :recursive t
-          :publishing-function org-publish-org-to-html
-          :headline-levels 4 
-          :html-extension "html"
-          :body-only t ;; Only export section between <body> </body>
-    )
-
-
-    ("org-growblog-static"
-          :base-directory "~/blogs/growblog/org/"
-          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
-          :publishing-directory "/blogs/growblog/"
-          :recursive t
-          :publishing-function org-publish-attachment)
-
-    ("growblog" :components ("org-growblog" "org-growblog-static"))
-
-  ("org-progblog"
-          ;; Path to your org files.
-          :base-directory "~/blogs/progblog/org/"
-          :base-extension "org"
-
-          ;; Path to your Jekyll project.
-          :publishing-directory "~/blogs/progblog/tylergreen.github.com/"
-          :recursive t
-          :publishing-function org-publish-org-to-html
-          :headline-levels 4 
-          :html-extension "html"
-          :body-only t ;; Only export section between <body> </body>
-    )
-
-
-    ("org-progblog-static"
-          :base-directory "~/blogs/progblog/org/"
-          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
-          :publishing-directory "/blogs/progblog/"
-          :recursive t
-          :publishing-function org-publish-attachment)
-
-    ("progblog" :components ("org-progblog" "org-progblog-static"))
-
-))
+;; Blogging
+(load "~/.emacs.d/lisp/borg.el")
