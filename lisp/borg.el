@@ -1,10 +1,3 @@
-; workflow
-; create new file (with annoying time format)
-; add jekyll header to file
-; create outline
-; M-x org-publish
-; jekyll --server
-
 (defvar prog-blog-dir "~/blogs/tylergreen.github.com/_posts/")
 
 (defun jekyll-post-meta-data (title)

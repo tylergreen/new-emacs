@@ -218,12 +218,13 @@
  "M-c" cap-prev
  "C-x C-b" ibuffer
  "M-k" kill-ring-save
+ "M-SPC" set-mark-command
 ; "M-w" ; available
 ; M-f forward-whitespace
 ; M-b backward-whitespace ; not written
  )
 
-(defun datahand ()
+(defi datahand
     (global-keymap
 	"M-SPC" set-mark-command
 	 "M-u" windmove-up
@@ -232,7 +233,7 @@
 	 "M-'" windmove-right
 	))
 
-(defun kineses ()
+(defi kineses
   (global-keymap
    "<up>" windmove-up
    "<down>" windmove-down
