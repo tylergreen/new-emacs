@@ -232,7 +232,15 @@
 	 "M-'" windmove-right
 	))
 
-(datahand)
+(defun kineses ()
+  (global-keymap
+   "<up>" windmove-up
+   "<down>" windmove-down
+   "<right>" windmove-right
+   "<left>" windmove-left
+   ))
+
+(kineses)
 
 (put 'kill-ring-save 'interactive-form
 	 '(interactive 
@@ -284,27 +292,21 @@
 ;; Customize this for you own use -- straight from emacs-fu
 (setq ibuffer-saved-filter-groups
   '((("default"      
-            ("Org" ;; all org-related buffers
-              (mode . org-mode))  
-            ("Mail"
-              (or  ;; mail-related buffers
-               (mode . message-mode)
-               (mode . mail-mode)
-               ;; etc.; all your mail related modes
-               ))
-            ("iovation"
-              (filename . "~/clojure/iovation/"))
-            ("erlang"
-              (filename . "~/erlang/"))
-            ("Programming" ;; prog stuff not already in MyProjectX
-              (or
+	  ("Org" ;; all org-related buffers
+	   (mode . org-mode))
+	  ("Shells"
+	   (mode . shell-mode))
+	  ("magit"
+	   (mode . magit-status-mode)
+	   ("Programming" ;; prog stuff not already in MyProjectX
+		(or
                 (mode . c-mode)
                 (mode . perl-mode)
                 (mode . python-mode)
                 (mode . emacs-lisp-mode)
                 ;; etc
                 )) 
-            ("ERC"   (mode . erc-mode))))))
+	   ("ERC"   (mode . erc-mode)))))))
 
 (add-hook 'ibuffer-mode-hook
 		  (fn () (ibuffer-switch-to-saved-filter-groups "default")))
