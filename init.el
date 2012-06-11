@@ -118,6 +118,7 @@
 		coffee-mode
 		color-theme
 		color-theme-solarized
+		ecb
 		el-get
 		google-maps
 		graphviz-dot-mode
@@ -219,7 +220,7 @@
  "C-x C-b" ibuffer
  "M-k" kill-ring-save
  "M-SPC" set-mark-command
-; "M-w" ; available
+ "M-w" ecb-toggle-between
 ; M-f forward-whitespace
 ; M-b backward-whitespace ; not written
  )
@@ -239,6 +240,15 @@
    "<down>" windmove-down
    "<right>" windmove-right
    "<left>" windmove-left
+   ))
+
+
+(defi normal-keyboard
+  (global-keymap
+   "<up>" previous-line
+   "<down>" next-line
+   "<right>" forward-char
+   "<left>" backward-char
    ))
 
 (kineses)
@@ -325,3 +335,22 @@
 
 ;; Blogging
 (load "~/.emacs.d/lisp/borg.el")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(defi ecb-toggle-between
+  (if (equal (buffer-name) " *ECB Directories*" )
+	  (ecb-goto-window-edit-last)
+	(ecb-goto-window-directories)
+  ))
