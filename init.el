@@ -133,6 +133,7 @@
 ;;		ruby-electric
 		rvm
 		shell-current-directory
+		smex
 		swank-clojure
 		vkill 
 		yasnippet
@@ -196,6 +197,11 @@
 
 ;****************
 ; Emacs Config
+
+;;; Shut up compile saves
+(setq compilation-ask-about-save nil)
+;;; Don't save *anything*
+(setq compilation-save-buffers-predicate '(lambda () nil))
 
 ; never see that stupid warning again
 ; can also pass nil
