@@ -249,6 +249,7 @@
  "M-k" kill-ring-save
  "M-SPC" set-mark-command
  "M-w" ecb-toggle-between
+ "M-x" smex
 ; M-f forward-whitespace
 ; M-b backward-whitespace ; not written
  )
