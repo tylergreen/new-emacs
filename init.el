@@ -130,7 +130,7 @@
 		ruby-mode
 		ruby-compilation
 		ruby-end
-		ruby-electric
+;;		ruby-electric
 		rvm
 		shell-current-directory
 		swank-clojure
@@ -140,6 +140,28 @@
 ))
 
 (el-get 'sync my-packages)
+
+
+;;;; ********
+;; Ruby Mode
+
+(load-file "~/.emacs.d/lisp/ruby-electric.el")
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
+(add-hook 'ruby-mode-hook (lambda () (local-set-key "\r" 'newline-and-indent)))
+(add-hook 'ruby-mode-hook (lambda () (electric-pair-mode nil)))
+
+
+(add-to-list 'compilation-error-regexp-alist-alist 
+			 '(ruby-test-minitest
+               "\\[\\(\\(\/[^.]+\\)+.rb\\):\\(\[0-9]+\\)\\]:"
+
+ 1 3) t)
+
+(add-to-list 'compilation-error-regexp-alist
+			 'ruby-test-minitest)
+			  
+
 
 
 ;;;;;;;;;;;;;;;;;
@@ -265,8 +287,6 @@
 	(kill-line)))
 
 
-
-
 (defun disable (commands)
   (mapc (fn (x) (put x 'disabled t))
 	commands))
@@ -341,7 +361,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40"))
+ '(ecb-options-version "2.40")
+ 
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
