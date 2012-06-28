@@ -150,7 +150,7 @@
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 (add-hook 'ruby-mode-hook (lambda () (local-set-key "\r" 'newline-and-indent)))
-(add-hook 'ruby-mode-hook (lambda () (electric-pair-mode nil)))
+(add-hook 'ruby-mode-hook (lambda () (electric-pair-mode -1)))
 
 
 (add-to-list 'compilation-error-regexp-alist-alist 
