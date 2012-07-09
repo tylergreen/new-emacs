@@ -113,7 +113,6 @@
   (color-theme-hober) ;     (color-theme-calm-forest)
   )
 
-
 (unless (transient-mark-mode)
   (transient-mark-mode))
 
@@ -129,7 +128,7 @@
 		))
 
 (ido-mode)
-
+(setq ido-auto-merge-delay-time 5)
 
 ;****************
 ; Emacs Config
@@ -224,7 +223,6 @@
 	  (kill-region (region-beginning) (region-end))
 	(kill-line)))
 
-
 (defun disable (commands)
   (mapc (fn (x) (put x 'disabled t))
 	commands))
@@ -235,7 +233,6 @@
 
 ; *********
 ; Custom Commands
-
 
 (defi dot
   (find-file "~/.emacs.d/init.el"))
