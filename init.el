@@ -3,45 +3,10 @@
 ;; This will move you to the beginning of the first defun that is unbalanced. 
 
 ;; See local-config.el for local configurations
+;;
 
-;*****************
-; Elisp Utils
-
-(defmacro defi (name &rest body)
-  "define standard interactive function"
-  `(defun ,name () 
-     (interactive)
-     ,@body))
-
-
-(defun group (n source)
-  (if (endp source)
-      nil
-    (let ((rest (nthcdr n source)))
-      (cons (if (consp rest) (subseq source 0 n ) source)
-	    (group n rest)))))
-
-(defun mkassoc (binds)
-  (if (endp binds)
-      nil
-    (cons (cons (car binds) (cadr binds))
-	  (mkassoc (nthcdr 2 binds)))))
-
-(defmacro fn (params &rest body)
-  `(lambda ,params ,@body))
-
-; the need for this highlights a big weakness of lisp macros 
-(defmacro mapm (macro &rest defs)
-  "apply a macro to each list in DEFN"
-  `(progn ,@(mapcar (fn (x) (cons macro x)) defs)))
-
-; REMEMBER: nconc-- last cdr of each of the lists is changed to
-; refer to the following list.
-; The last of the lists is not altered
-
-(defun load-if-exists (filename)
-  (if (file-exists-p filename)
-      (load-file filename)))
+(load-file "lisp/utils.el")
+(load-file "lisp/my-ruby.el")
 
 ;*******************
 ; Parenthesis Matching
@@ -57,9 +22,6 @@
 
 (dirtrack-mode t)
 
-;***************
-; Customizations
-
 ;; use word wrapping everywhere
 (global-visual-line-mode 1)
 
@@ -71,9 +33,6 @@
 
 (setq auto-save-file-name-transforms
 	  `((".*" ,temporary-file-directory t)))
-
-(defmacro disable-if-bound (fn)
-  `(when (fboundp ',fn) (,fn -1)))
 
 (mapm disable-if-bound
       (menu-bar-mode)
@@ -142,29 +101,6 @@
 
 (el-get 'sync my-packages)
 
-
-;;;; ********
-;; Ruby Mode
-
-(load-file "~/.emacs.d/lisp/ruby-electric.el")
-(require 'ruby-electric)
-(add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
-(add-hook 'ruby-mode-hook (lambda () (local-set-key "\r" 'newline-and-indent)))
-(add-hook 'ruby-mode-hook (lambda () (electric-pair-mode -1)))
-
-
-(add-to-list 'compilation-error-regexp-alist-alist 
-			 '(ruby-test-minitest
-               "\\[\\(\\(\/[^.]+\\)+.rb\\):\\(\[0-9]+\\)\\]:"
-
- 1 3) t)
-
-(add-to-list 'compilation-error-regexp-alist
-			 'ruby-test-minitest)
-			  
-
-
-
 ;;;;;;;;;;;;;;;;;
 ; Windowing Config 
 
@@ -221,11 +157,6 @@
 		  "\\.yml\\'" yaml-mode
 		  )))
 
-;; classic lisp macro example
-(defmacro global-keymap (&rest bindings)
-  `(progn ,@(mapcar (fn (pair)
-		    `(global-set-key (kbd ,(car pair)) ',(cdr pair)))
-		(mkassoc bindings))))
 
 (mapc 'global-unset-key '( "\C-_"
 			  ))
@@ -348,7 +279,6 @@
 
 (add-hook 'ibuffer-mode-hook
 		  (fn () (ibuffer-switch-to-saved-filter-groups "default")))
-
 
 ; *********** 
 ; Major Modes 
