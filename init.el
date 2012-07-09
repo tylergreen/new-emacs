@@ -83,6 +83,8 @@
 		graphviz-dot-mode
 		haskell-mode
 		haskell-mode-exts
+		js-comint
+		js2-mode
 		json
 		lua-mode
 		mustache-mode
