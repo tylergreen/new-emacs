@@ -5,8 +5,13 @@
 ;; See local-config.el for local configurations
 ;;
 
-(load-file "lisp/utils.el")
-(load-file "lisp/my-ruby.el")
+; ***********
+; My extensions
+; put a file name '.nosearch' in directories you do not want to be loaded
+ (let ((default-directory "~/.emacs.d/lisp/"))
+      (normal-top-level-add-subdirs-to-load-path))
+
+(load-file "~/.emacs.d/lisp/my-utils.el")
 
 ;*******************
 ; Parenthesis Matching
@@ -53,12 +58,6 @@
        (mac-setup))
       ((member system-type '(gnu/linux linux))
        (linux-setup)))
-
-; ***********
-; My extensions
-; put a file name '.nosearch' in directories you do not want to be loaded
- (let ((default-directory "~/.emacs.d/lisp/"))
-      (normal-top-level-add-subdirs-to-load-path))
 
 ; *************
 ; el-get
@@ -312,3 +311,7 @@
 	  (ecb-goto-window-edit-last)
 	(ecb-goto-window-directories)
   ))
+
+;; **********
+;; Language specific extensions
+(load-file "~/.emacs.d/lisp/my-ruby.el")
