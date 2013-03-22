@@ -5,6 +5,9 @@
 ;; See local-config.el for local configurations
 ;;
 
+;; for ECB
+(setq stack-trace-on-error nil)
+
 ; ***********
 ; My extensions
 ; put a file name '.nosearch' in directories you do not want to be loaded
@@ -35,6 +38,8 @@
 
 (setq backup-directory-alist
 	  `((".*" . ,temporary-file-directory)))
+
+(setq auto-save-mode nil)
 
 (setq auto-save-file-name-transforms
 	  `((".*" ,temporary-file-directory t)))
@@ -315,3 +320,4 @@
 ;; **********
 ;; Language specific extensions
 (load-file "~/.emacs.d/lisp/my-ruby.el")
+
