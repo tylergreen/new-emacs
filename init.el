@@ -36,13 +36,15 @@
 ; allow exit of emacs client without closing any buffers
 (setq server-kill-new-buffers nil)
 
-(setq backup-directory-alist
-	  `((".*" . ,temporary-file-directory)))
+(setq make-backup-files nil)
 
 (setq auto-save-mode nil)
 
-(setq auto-save-file-name-transforms
-	  `((".*" ,temporary-file-directory t)))
+;; (setq backup-directory-alist
+;; 	  `((".*" . ,temporary-file-directory)))
+
+;; (setq auto-save-file-name-transforms
+;; 	  `((".*" ,temporary-file-directory t)))
 
 (mapm disable-if-bound
       (menu-bar-mode)
