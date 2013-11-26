@@ -36,9 +36,10 @@
 ; allow exit of emacs client without closing any buffers
 (setq server-kill-new-buffers nil)
 
+(setq backup-inhibited t)
 (setq make-backup-files nil)
 
-(setq auto-save-mode nil)
+(setq auto-save-default nil)
 
 ;; (setq backup-directory-alist
 ;; 	  `((".*" . ,temporary-file-directory)))
@@ -69,13 +70,14 @@
 ; *************
 ; el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil t)
+(unless (require 'el-get nil 'noerror)
   (with-current-buffer
 	  (url-retrieve-synchronously
 	   "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-	(end-of-buffer)
+	(goto-char (point-max))
 	(eval-print-last-sexp)))
 
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
 (setq my-packages
@@ -90,7 +92,7 @@
 		haskell-mode
 		haskell-mode-exts
 		js-comint
-		js2-mode
+
 		json
 		lua-mode
 		mustache-mode
@@ -143,14 +145,14 @@
 
 ;;; Shut up compile saves
 (setq compilation-ask-about-save nil)
-;;; Don't save *anything*
+;;; Don't save anything
 (setq compilation-save-buffers-predicate '(lambda () nil))
 
 ; never see that stupid warning again
 ; can also pass nil
 (setq enable-local-variables :safe)
 
-; don't make me type yes and no
+; one letter yes/no responses
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (mapc (fn (pair) (add-to-list 'auto-mode-alist pair))
@@ -218,7 +220,7 @@
    "<left>" backward-char
    ))
 
-(kineses)
+(datahand)
 
 (put 'kill-ring-save 'interactive-form
 	 '(interactive 
