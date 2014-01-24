@@ -67,18 +67,18 @@
       ((member system-type '(gnu/linux linux))
        (linux-setup)))
 
-; *************
-; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
+;; ; *************
+;; ; el-get
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; (unless (require 'el-get nil 'noerror)
+;;   (with-current-buffer
+;; 	  (url-retrieve-synchronously
+;; 	   "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+;; 	(goto-char (point-max))
+;; 	(eval-print-last-sexp)))
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;; (el-get 'sync)
 
 (setq my-packages
 	  '(clojure-mode
@@ -92,7 +92,6 @@
 		haskell-mode
 		haskell-mode-exts
 		js-comint
-
 		json
 		lua-mode
 		mustache-mode
@@ -109,7 +108,22 @@
 ;		yaml-mode
 ))
 
-(el-get 'sync my-packages)
+
+
+;;(el-get 'sync my-packages)
+(when (>= emacs-major-version 24)
+  (setq package-enable-at-startup nil)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives
+			   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (require 'color-theme)
+  (color-theme-initialize)
+  (color-theme-hober)
+  
+  )
+
+
 
 ;;;;;;;;;;;;;;;;;
 ; Windowing Config 
@@ -118,10 +132,10 @@
 (add-hook 'shell-mode-hook
 	  'ansi-color-for-comint-mode-on)
 
-(if window-system
-	(color-theme-solarized-dark) ; (color-theme-gnome2)
-  (color-theme-hober) ;     (color-theme-calm-forest)
-  )
+ (if window-system
+ 	(color-theme-solarized-dark) ; (color-theme-gnome2)
+   (color-theme-hober) ;     (color-theme-calm-forest)
+   )
 
 (unless (transient-mark-mode)
   (transient-mark-mode))
@@ -323,5 +337,5 @@
 
 ;; **********
 ;; Language specific extensions
-(load-file "~/.emacs.d/lisp/my-ruby.el")
+;;(load-file "~/.emacs.d/lisp/my-ruby.el")
 
