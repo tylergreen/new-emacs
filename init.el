@@ -23,7 +23,11 @@
 (show-paren-mode t)
 (setq show-paren-delay 2) ; delay in seconds
 
-(setq-default tab-width 4)
+(setq-default js2-basic-offset 2)
+(setq-default tab-width 2)
+(setq tab-stop-list (number-sequence 2 120 2))
+(setq indent-tabs-mode nil)
+
 
 ;*******
 ; Shell Mode
@@ -321,5 +325,5 @@
 
 ;; **********
 ;; Language specific extensions
-(load-file "~/.emacs.d/lisp/my-ruby.el")
+;;(load-file "~/.emacs.d/lisp/my-ruby.el")
 
