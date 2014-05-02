@@ -26,7 +26,7 @@
 (setq-default js2-basic-offset 2)
 (setq-default tab-width 2)
 (setq tab-stop-list (number-sequence 2 120 2))
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 
 ;*******
@@ -192,6 +192,8 @@
  "M-SPC" set-mark-command
  "M-w" ecb-toggle-between
  "M-x" smex
+ "C-x f" find-file-in-repository
+ "C-x C-f" find-file-in-repository
 ; M-f forward-whitespace
 ; M-b backward-whitespace ; not written
  )
